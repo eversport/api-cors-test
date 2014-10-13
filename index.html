@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Free Courts</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<h1>Free Courts</h1>
+
+<div id="content">
+
+</div>
+<script>
+    var renderFreeCourt = function (court) {
+        var $content = $('#content');
+        console.log("Court", court);
+        $content.prepend('<div class="venue"><h2>' + court.sportstaette + '</h2><img style="max-width:250px;height:auto;" src="' + court.picUrl + '"><p>Court Name:' + court.courtName + '<br>Preis:' + court.price + '</p></div><br><hr>');
+    };
+    $(function () {
+        $.ajax({
+            url: "https://api.eversport.at/v2/venues/freecourts",
+            crossDomain: true
+        }).success(function (data, msg, xhr) {
+            if (!data && !data.venues) {
+                return console.error("Got response but wrong format");
+            }
+            var venues = data.venues;
+            if ($.isArray(data.venues[0])) venues = data.venues[0];
+            venues.forEach(renderFreeCourt);
+        });
+    });
+</script>
+</body>
+</html>
