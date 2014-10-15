@@ -25,9 +25,7 @@
             if (!data && !data.venues) {
                 return console.error("Got response but wrong format");
             }
-            var venues = data.venues;
-            if ($.isArray(data.venues[0])) venues = data.venues[0];
-            venues.forEach(renderFreeCourt);
+            data.forEach(renderFreeCourt);
         });
     });
 </script>
