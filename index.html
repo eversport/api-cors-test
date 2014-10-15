@@ -22,7 +22,7 @@
             url: "https://api.eversport.at/v2/venues/freecourts",
             crossDomain: true
         }).success(function (data, msg, xhr) {
-            if (!data && !data.venues) {
+            if (!data) {
                 return console.error("Got response but wrong format");
             }
             data.forEach(renderFreeCourt);
